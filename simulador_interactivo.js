@@ -17,7 +17,7 @@ function jugar(opcionUsuario) {
     const opcionesValidas = opciones.filter((opcion) => opcion === opcionUsuario.toLowerCase());
 
     if (opcionesValidas.length === 0) {
-        console.log('Opción inválida. Inténtalo de nuevo.');
+        console.log('Opción inválida. Inténtalo de nuevo...');
         return null;
     }
     const opcionComputadora = opciones[Math.floor(Math.random() * opciones.length)];
