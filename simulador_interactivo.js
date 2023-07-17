@@ -1,10 +1,25 @@
+function Persona(nombre, edad) {
+    this.nombre = nombre;
+    this.edad = edad;
+}
+
 function name() {
     let nombre = prompt("What is your name?");
-    alert("Welcome " + nombre);
+    let edad = prompt("How old are you?");
+    alert("Welcome " + nombre + ". Your age is " + edad + ".");
+    return new Persona(nombre, edad);
 }
 
 function jugar(opcionUsuario) {
     const opciones = ['piedra', 'papel', 'tijeras'];
+
+
+    const opcionesValidas = opciones.filter((opcion) => opcion === opcionUsuario.toLowerCase());
+
+    if (opcionesValidas.length === 0) {
+        console.log('Opción inválida. Inténtalo de nuevo.');
+        return null;
+    }
     const opcionComputadora = opciones[Math.floor(Math.random() * opciones.length)];
 
     console.log('Usuario:', opcionUsuario);
@@ -27,8 +42,9 @@ function jugar(opcionUsuario) {
 }
 
 function iniciar_juego() {
-    name();
+    let persona = name();
     let puntos = 0;
+    let puntosMaquina = 0;
     let opcionUsuario;
 
     while (opcionUsuario !== '4') {
@@ -40,15 +56,18 @@ function iniciar_juego() {
 
                 while (continuar) {
                     let opcion = prompt("Elige una opción (piedra, papel o tijeras):");
-                    let resultado = jugar(opcion);
-                    puntos += resultado;
+                    let resultado = jugar(opcion, persona);
 
                     if (resultado === 1) {
-                        alert("¡Ganaste esta ronda!");
+                        alert(persona.nombre + " wins");
+                        puntos++;
                     } else if (resultado === -1) {
-                        alert("Perdiste esta ronda");
+                        alert("defeat");
+                        puntosMaquina++;
+                    } else if (resultado === 0) {
+                        alert("tie");
                     } else {
-                        alert("Empate en esta ronda");
+                        alert("ingresa un dato correcto...")
                     }
 
                     let respuesta = prompt("¿Quieres jugar otra ronda? (s/n)");
@@ -58,10 +77,11 @@ function iniciar_juego() {
                 }
                 break;
             case '2':
-                alert("Puntos: " + puntos);
+                alert(persona.nombre + ": " + puntos + " puntos\nMáquina: " + puntosMaquina + " puntos");
                 break;
             case '3':
                 puntos = 0;
+                puntosMaquina = 0;
                 alert("Puntos reiniciados.");
                 break;
             case '4':
