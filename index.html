@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,8 +8,24 @@
     <link rel="stylesheet" href="style.css">
     <title>You_vs_Ai</title>
 </head>
+
 <body>
-    
+    <h1>Piedra, Papel o Tijeras</h1>
+    <p>Ingrese su nombre y edad:</p>
+    <input type="text" id="nombre" placeholder="Nombre">
+    <input type="number" id="edad" placeholder="Edad">
+    <button id="comenzar">Comenzar</button>
+    <div id="juego" style="display: none;">
+        <h2 id="resultado"></h2>
+        <p id="puntos"></p>
+        <button id="piedra">Piedra</button>
+        <button id="papel">Papel</button>
+        <button id="tijeras">Tijeras</button>
+        <button id="verPuntos">Ver Puntos</button>
+        <button id="reiniciarPuntos">Reiniciar Puntos</button>
+        <button id="salir">Salir</button>
+    </div>
 </body>
+
 </html>
 <script src="simulador_interactivo.js"></script>

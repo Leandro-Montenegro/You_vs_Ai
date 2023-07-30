@@ -1,11 +1,21 @@
+let persona;
+let puntosJugador = 0;
+let puntosMaquina = 0;
+
 function Persona(nombre, edad) {
     this.nombre = nombre;
     this.edad = edad;
 }
 
 function name() {
-    let nombre = prompt("What is your name?");
-    let edad = prompt("How old are you?");
+    let nombre = document.getElementById("nombre").value;
+    let edad = document.getElementById("edad").value;
+
+    if (nombre === "" || edad === "") {
+        alert("Por favor, ingrese su nombre y edad.");
+        return null;
+    }
+
     alert("Welcome " + nombre + ". Your age is " + edad + ".");
     return new Persona(nombre, edad);
 }
@@ -13,85 +23,71 @@ function name() {
 function jugar(opcionUsuario) {
     const opciones = ['piedra', 'papel', 'tijeras'];
 
-
     const opcionesValidas = opciones.filter((opcion) => opcion === opcionUsuario.toLowerCase());
 
     if (opcionesValidas.length === 0) {
         console.log('Opción inválida. Inténtalo de nuevo...');
         return null;
     }
+
     const opcionComputadora = opciones[Math.floor(Math.random() * opciones.length)];
 
     console.log('Usuario:', opcionUsuario);
     console.log('Computadora:', opcionComputadora);
 
+    let resultado = document.getElementById("resultado");
+
     if (opcionUsuario === opcionComputadora) {
-        console.log('Empate');
-        return 0;
+        resultado.textContent = 'Empate';
     } else if (
         (opcionUsuario === 'piedra' && opcionComputadora === 'tijeras') ||
         (opcionUsuario === 'papel' && opcionComputadora === 'piedra') ||
         (opcionUsuario === 'tijeras' && opcionComputadora === 'papel')
     ) {
-        console.log('Ganaste');
-        return 1;
+        resultado.textContent = 'Ganaste';
+        puntosJugador++;
     } else {
-        console.log('Perdiste');
-        return -1;
+        resultado.textContent = 'Perdiste';
+        puntosMaquina++;
     }
+
+    document.getElementById("puntos").textContent = persona.nombre + ": " + puntosJugador + " puntos | Máquina: " + puntosMaquina + " puntos";
+}
+
+function verPuntos() {
+    alert(persona.nombre + ": " + puntosJugador + " puntos\nMáquina: " + puntosMaquina + " puntos");
 }
 
 function iniciar_juego() {
-    let persona = name();
-    let puntos = 0;
-    let puntosMaquina = 0;
-    let opcionUsuario;
-
-    while (opcionUsuario !== '4') {
-        opcionUsuario = prompt("Elige una opción:\n1. Jugar\n2. Ver puntos\n3. Reiniciar puntos\n4. Salir");
-
-        switch (opcionUsuario) {
-            case '1':
-                let continuar = true;
-
-                while (continuar) {
-                    let opcion = prompt("Elige una opción (piedra, papel o tijeras):");
-                    let resultado = jugar(opcion, persona);
-
-                    if (resultado === 1) {
-                        alert(persona.nombre + " wins");
-                        puntos++;
-                    } else if (resultado === -1) {
-                        alert("defeat");
-                        puntosMaquina++;
-                    } else if (resultado === 0) {
-                        alert("tie");
-                    } else {
-                        alert("ingresa un dato correcto...")
-                    }
-
-                    let respuesta = prompt("¿Quieres jugar otra ronda? (s/n)");
-                    if (respuesta.toLowerCase() !== "s") {
-                        continuar = false;
-                    }
-                }
-                break;
-            case '2':
-                alert(persona.nombre + ": " + puntos + " puntos\nMáquina: " + puntosMaquina + " puntos");
-                break;
-            case '3':
-                puntos = 0;
-                puntosMaquina = 0;
-                alert("Puntos reiniciados.");
-                break;
-            case '4':
-                alert("¡Hasta luego!");
-                break;
-            default:
-                alert("Opción inválida. Inténtalo de nuevo.");
-                break;
-        }
+    persona = name();
+    if (persona === null) {
+        return;
     }
+
+    document.getElementById("juego").style.display = "block";
 }
 
-iniciar_juego();
+function reiniciarPuntos() {
+    puntosJugador = 0;
+    puntosMaquina = 0;
+    document.getElementById("puntos").textContent = persona.nombre + ": 0 puntos | Máquina: 0 puntos";
+}
+
+function salir() {
+    alert("¡Hasta luego!");
+    document.getElementById("juego").style.display = "none";
+}
+
+document.getElementById("comenzar").addEventListener("click", iniciar_juego);
+document.getElementById("piedra").addEventListener("click", function() {
+    jugar('piedra');
+});
+document.getElementById("papel").addEventListener("click", function() {
+    jugar('papel');
+});
+document.getElementById("tijeras").addEventListener("click", function() {
+    jugar('tijeras');
+});
+document.getElementById("verPuntos").addEventListener("click", verPuntos);
+document.getElementById("reiniciarPuntos").addEventListener("click", reiniciarPuntos);
+document.getElementById("salir").addEventListener("click", salir);
