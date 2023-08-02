@@ -10,15 +10,9 @@ function Persona(nombre, edad) {
 function name() {
     let nombre = document.getElementById("nombre").value;
     let edad = document.getElementById("edad").value;
-
-    if (nombre === "" || edad === "") {
-        alert("Por favor, ingrese su nombre y edad.");
-        return null;
-    }
-
-    alert("Welcome " + nombre + ". Your age is " + edad + ".");
     return new Persona(nombre, edad);
 }
+
 
 function jugar(opcionUsuario) {
     const opciones = ['piedra', 'papel', 'tijeras'];
@@ -54,10 +48,6 @@ function jugar(opcionUsuario) {
     document.getElementById("puntos").textContent = persona.nombre + ": " + puntosJugador + " puntos | Máquina: " + puntosMaquina + " puntos";
 }
 
-function verPuntos() {
-    alert(persona.nombre + ": " + puntosJugador + " puntos\nMáquina: " + puntosMaquina + " puntos");
-}
-
 function iniciar_juego() {
     persona = name();
     if (persona === null) {
@@ -74,7 +64,6 @@ function reiniciarPuntos() {
 }
 
 function salir() {
-    alert("¡Hasta luego!");
     document.getElementById("juego").style.display = "none";
 }
 
@@ -88,6 +77,5 @@ document.getElementById("papel").addEventListener("click", function() {
 document.getElementById("tijeras").addEventListener("click", function() {
     jugar('tijeras');
 });
-document.getElementById("verPuntos").addEventListener("click", verPuntos);
 document.getElementById("reiniciarPuntos").addEventListener("click", reiniciarPuntos);
 document.getElementById("salir").addEventListener("click", salir);
