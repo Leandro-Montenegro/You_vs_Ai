@@ -13,6 +13,32 @@ function name() {
     return new Persona(nombre, edad);
 }
 
+function guardarDatos() {
+    const datos = {
+        nombre: persona.nombre,
+        edad: persona.edad,
+        puntosJugador: puntosJugador,
+        puntosMaquina: puntosMaquina
+    };
+
+    const datosJSON = JSON.stringify(datos);
+
+    localStorage.setItem("datosJuego", datosJSON);
+}
+
+function cargarDatos() {
+    const datosJSON = localStorage.getItem("datosJuego");
+
+    if (datosJSON) {
+        const datos = JSON.parse(datosJSON);
+        nombre = datos.nombre;
+        edad = datos.edad;
+        puntosJugador = datos.puntosJugador;
+        puntosMaquina = datos.puntosMaquina;
+
+        document.getElementById("puntos").textContent = persona.nombre + ": " + puntosJugador + " puntos | Máquina: " + puntosMaquina + " puntos";
+    }
+}
 
 function jugar(opcionUsuario) {
     const opciones = ['piedra', 'papel', 'tijeras'];
@@ -45,6 +71,8 @@ function jugar(opcionUsuario) {
         puntosMaquina++;
     }
 
+    guardarDatos();
+
     document.getElementById("puntos").textContent = persona.nombre + ": " + puntosJugador + " puntos | Máquina: " + puntosMaquina + " puntos";
 }
 
@@ -54,12 +82,14 @@ function iniciar_juego() {
         return;
     }
 
+    cargarDatos();
     document.getElementById("juego").style.display = "block";
 }
 
 function reiniciarPuntos() {
     puntosJugador = 0;
     puntosMaquina = 0;
+    guardarDatos(); 
     document.getElementById("puntos").textContent = persona.nombre + ": 0 puntos | Máquina: 0 puntos";
 }
 
@@ -79,3 +109,5 @@ document.getElementById("tijeras").addEventListener("click", function() {
 });
 document.getElementById("reiniciarPuntos").addEventListener("click", reiniciarPuntos);
 document.getElementById("salir").addEventListener("click", salir);
+
+cargarDatos();
