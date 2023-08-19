@@ -39,6 +39,27 @@ function cargarDatos() {
         document.getElementById("puntos").textContent = persona.nombre + ": " + puntosJugador + " puntos | Máquina: " + puntosMaquina + " puntos";
     }
 }
+// Función para obtener un chiste de JokeAPI
+function obtenerChiste() {
+    const apiKey = 'https://v2.jokeapi.dev/joke/Any?safe-mode'; // Reemplaza 'TU_API_KEY_AQUI' con tu clave API de JokeAPI
+    const url = `https://v2.jokeapi.dev/joke/Any?apiKey=${apiKey}`;
+
+    fetch(url)
+        .then((response) => response.json())
+        .then((data) => {
+            if (data.type === 'single') {
+                mostrarChiste(data.joke);
+            } else if (data.type === 'twopart') {
+                mostrarChiste(data.setup, data.delivery);
+            }
+        })
+        .catch((error) => {
+            console.error('Error al obtener chiste:', error);
+        });
+}
+
+// Agrega un evento para obtener un chiste cuando se haga clic en un botón
+document.getElementById('obtenerChiste').addEventListener('click', obtenerChiste);
 
 function jugar(opcionUsuario) {
     const opciones = ['piedra', 'papel', 'tijeras'];
