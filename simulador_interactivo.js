@@ -41,7 +41,7 @@ function cargarDatos() {
 }
 // Función para obtener un chiste de JokeAPI
 function obtenerChiste() {
-    const apiKey = 'https://v2.jokeapi.dev/joke/Misc,Programación?format=xml&safe-mode&type=single'; // Reemplaza 'TU_API_KEY_AQUI' con tu clave API de JokeAPI
+    const apiKey = 'https://v2.jokeapi.dev/joke/Misc,Programación?format=xml&safe-mode&type=single';
     const url = `https://v2.jokeapi.dev/joke/Any?apiKey=${apiKey}`;
 
     fetch(url)
@@ -58,7 +58,6 @@ function obtenerChiste() {
         });
 }
 
-// Agrega un evento para obtener un chiste cuando se haga clic en un botón
 document.getElementById('obtenerChiste').addEventListener('click', obtenerChiste);
 
 function jugar(opcionUsuario) {
@@ -110,7 +109,7 @@ function iniciar_juego() {
 function reiniciarPuntos() {
     puntosJugador = 0;
     puntosMaquina = 0;
-    guardarDatos(); 
+    guardarDatos();
     document.getElementById("puntos").textContent = persona.nombre + ": 0 puntos | Máquina: 0 puntos";
 }
 
@@ -119,13 +118,13 @@ function salir() {
 }
 
 document.getElementById("comenzar").addEventListener("click", iniciar_juego);
-document.getElementById("piedra").addEventListener("click", function() {
+document.getElementById("piedra").addEventListener("click", function () {
     jugar('piedra');
 });
-document.getElementById("papel").addEventListener("click", function() {
+document.getElementById("papel").addEventListener("click", function () {
     jugar('papel');
 });
-document.getElementById("tijeras").addEventListener("click", function() {
+document.getElementById("tijeras").addEventListener("click", function () {
     jugar('tijeras');
 });
 document.getElementById("reiniciarPuntos").addEventListener("click", reiniciarPuntos);
