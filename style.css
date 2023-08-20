@@ -29,7 +29,7 @@ input[type="number"] {
 }
 
 button {
-    background-color: #007BFF;
+    background-color: rgb(10, 6, 246);
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -39,8 +39,16 @@ button {
     transition: background-color 0.3s;
 }
 
+.comenzar{
+    background-color: rgb(66, 128, 190);
+}
+
+.boton_especial{
+    background-color: rgb(18, 3, 59);
+}
+
 button:hover {
-    background-color: #0056b3;
+    background-color: rgb(155, 29, 151);
 }
 
 h2 {
@@ -48,23 +56,23 @@ h2 {
 }
 
 #resultado {
-    font-size: 24px;
+    font-size: 15px;
     margin-bottom: 10px;
 }
 
 #puntos {
-    font-size: 18px;
+    font-size: 12px;
     margin-bottom: 20px;
 }
 
 /* Estilos para SweetAlert2 */
 
 .swal2-title {
-    font-size: 24px;
+    font-size: 15px;
 }
 
 .swal2-content {
-    font-size: 16px;
+    font-size: 12px;
 }
 
 .swal2-confirm {
@@ -81,3 +89,4 @@ h2 {
 .swal2-confirm:hover {
     background-color: #0056b3;
 }
+

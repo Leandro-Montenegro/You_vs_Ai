@@ -41,7 +41,7 @@ function cargarDatos() {
 }
 // Función para obtener un chiste de JokeAPI
 function obtenerChiste() {
-    const apiKey = 'https://v2.jokeapi.dev/joke/Any?safe-mode'; // Reemplaza 'TU_API_KEY_AQUI' con tu clave API de JokeAPI
+    const apiKey = 'https://v2.jokeapi.dev/joke/Misc,Programación?format=xml&safe-mode&type=single'; // Reemplaza 'TU_API_KEY_AQUI' con tu clave API de JokeAPI
     const url = `https://v2.jokeapi.dev/joke/Any?apiKey=${apiKey}`;
 
     fetch(url)
